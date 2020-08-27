@@ -3,26 +3,26 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://jsvong.github.io/</loc>
+    <loc>https://tldr.jsv.me/</loc>
     <lastmod>2020-08-28T02:02:25+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jsvong.github.io/posts/my-first-post/</loc>
+    <loc>https://tldr.jsv.me/posts/</loc>
     <lastmod>2020-08-28T02:02:25+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jsvong.github.io/posts/</loc>
+    <loc>https://tldr.jsv.me/posts/my-first-post/</loc>
     <lastmod>2020-08-28T02:02:25+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://jsvong.github.io/categories/</loc>
+    <loc>https://tldr.jsv.me/categories/</loc>
   </url>
   
   <url>
-    <loc>https://jsvong.github.io/tags/</loc>
+    <loc>https://tldr.jsv.me/tags/</loc>
   </url>
   
 </urlset>
