@@ -166,8 +166,8 @@
         <div class="posts-list">
           
             <article class="post-preview">
-    <a href="https://tldr.jsv.me/posts/my-first-post/">
-        <h2 class="post-title">第一帖</h2>
+    <a href="https://tldr.jsv.me/posts/reverse-proxy-tumblr/">
+        <h2 class="post-title">亲爱的我把 Tumblr 反向代理了</h2>
         
         
         
@@ -177,13 +177,13 @@
         <span class="post-meta">
   
   
-  <i class="fas fa-calendar"></i>&nbsp;Posted on August 28, 2020
+  <i class="fas fa-calendar"></i>&nbsp;Posted on January 1, 0001
   
   
   
   
     
-      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;
+      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;me
     
   
   
@@ -193,8 +193,18 @@
     </p>
     <div class="post-entry">
         
-        <p>Hello World!</p>
-
+        content {:toc}  序 终于搬砖将自己的 Tumblr 重新搭好，然后发现xx移动把 Tumblr 墙了👀。决定用「反向代理」这种简单粗暴直接的方式实现无阻碍访问。
+ 过程 初始设置 一般会使用 Nginx 来做反向代理。找到了一个现成配置是用来反向代理 Tumblr 的：
+(via Wood Tale)
+在自己的 VPS 服务器上照此设置了 Nginx，然并卵，实际使用中所有的图片仍然显示不出来。
+ 问题分析 Tumblr 把图片分为两种：装饰网页用的底图、logo 等等，以及发表内容时上传的照片、动图等。前者被 Tumblr 统一放在了 static.tumblr.com 服务器上，后者所在的服务器则使用了 数字.media.tumblr.com 这种形式的子域名。
+事实上除了图片，Tumblr 还会在类似 assets.tumblr.com 这样的服务器上放置一些 JS 代码。所以，需要针对所有这些服务器设置反向代理。
+ 改进设置 利用 Nginx 的 sub_filter，先把页面中所有的 tumblr.com 替换为 sample.com，即添加这行：
+(注#1：并不是所有 Nginx 的版本都支持超过一个 sub_filter，所以请更新 Nginx 到最新版。)
+(注#2：个人域名的 DNS 服务商最好支持 catch-all，即对 *.sample.com 这种形式的解析，这样就不用额外处理每一个子域名。)
+之后利用正则表达式和变量，配置对上述服务器的反向代理：
+server { listen 80; server_name ~^(?&lt;subdomain&gt;\S+)\.sample\.com$; location / { resolver 8.
+        <a href="https://tldr.jsv.me/posts/reverse-proxy-tumblr/" class="post-read-more">[Read More]</a>
         
     </div>
 
@@ -222,7 +232,7 @@
 
           &nbsp;&bull;&nbsp;&copy;
           
-            2020
+            0001
           
 
           

@@ -4,17 +4,6 @@
   
   <url>
     <loc>https://tldr.jsv.me/</loc>
-    <lastmod>2020-08-28T02:02:25+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://tldr.jsv.me/posts/</loc>
-    <lastmod>2020-08-28T02:02:25+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://tldr.jsv.me/posts/my-first-post/</loc>
-    <lastmod>2020-08-28T02:02:25+08:00</lastmod>
   </url>
   
   <url>
@@ -22,7 +11,19 @@
   </url>
   
   <url>
+    <loc>https://tldr.jsv.me/categories/nginx-tumblr/</loc>
+  </url>
+  
+  <url>
+    <loc>https://tldr.jsv.me/posts/</loc>
+  </url>
+  
+  <url>
     <loc>https://tldr.jsv.me/tags/</loc>
+  </url>
+  
+  <url>
+    <loc>https://tldr.jsv.me/posts/reverse-proxy-tumblr/</loc>
   </url>
   
 </urlset>
