@@ -8,17 +8,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
   <title>亲爱的我把 Tumblr 反向代理了 - == TL;DR ==</title>
-  <meta name="description" content="content {:toc}  序 终于搬砖将自己的 Tumblr 重新搭好，然后发现xx移动把 Tumblr 墙了👀。决定用「反向代理」这种简单粗暴直接的方式实现无阻碍访问。
- 过程 初始设置 一般会使用 Nginx 来做反向代理。找到了一个现成配置是用来反向代理 Tumblr 的：
-(via Wood Tale)
+  <meta name="description" content="序 终于搬砖将自己的 Tumblr 重新搭好，然后发现xx移动把 Tumblr 墙了👀。决定用「反向代理」这种简单粗暴直接的方式实现无阻碍访问。
+ 过程 初始设置 一般会使用 Nginx 来做反向代理。找到了一个现成配置是用来反向代理 Tumblr 的： server { listen 80; server_name blog.sample.com;
+location / { proxy_pass http://sample.tumblr.com; proxy_redirect off; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; proxy_set_header Accept-Encoding &ldquo;&quot;; }
+sub_filter sample.tumblr.com blog.sample.com; sub_filter_once off; }(via Wood Tale)
 在自己的 VPS 服务器上照此设置了 Nginx，然并卵，实际使用中所有的图片仍然显示不出来。
  问题分析 Tumblr 把图片分为两种：装饰网页用的底图、logo 等等，以及发表内容时上传的照片、动图等。前者被 Tumblr 统一放在了 static.tumblr.com 服务器上，后者所在的服务器则使用了 数字.media.tumblr.com 这种形式的子域名。
 事实上除了图片，Tumblr 还会在类似 assets.tumblr.com 这样的服务器上放置一些 JS 代码。所以，需要针对所有这些服务器设置反向代理。
- 改进设置 利用 Nginx 的 sub_filter，先把页面中所有的 tumblr.com 替换为 sample.com，即添加这行：
-(注#1：并不是所有 Nginx 的版本都支持超过一个 sub_filter，所以请更新 Nginx 到最新版。)
-(注#2：个人域名的 DNS 服务商最好支持 catch-all，即对 *.sample.com 这种形式的解析，这样就不用额外处理每一个子域名。)
-之后利用正则表达式和变量，配置对上述服务器的反向代理：
-server { listen 80; server_name ~^(?&lt;subdomain&gt;\S&#43;)\.sample\.com$; location / { resolver 8."><script type="application/ld+json">
+ 改进设置 利用 Nginx 的 sub_filter，先把页面中所有的 tumblr."><script type="application/ld+json">
 {
     "@context": "http://schema.org",
     "@type": "WebSite",
@@ -66,9 +63,9 @@ server { listen 80; server_name ~^(?&lt;subdomain&gt;\S&#43;)\.sample\.com$; loc
     "name" : "me"
   },
   "headline": "亲爱的我把 Tumblr 反向代理了",
-  "description" : "content {:toc}  序 终于搬砖将自己的 Tumblr 重新搭好，然后发现xx移动把 Tumblr 墙了👀。决定用「反向代理」这种简单粗暴直接的方式实现无阻碍访问。\n 过程 初始设置 一般会使用 Nginx 来做反向代理。找到了一个现成配置是用来反向代理 Tumblr 的：\n(via Wood Tale)\n在自己的 VPS 服务器上照此设置了 Nginx，然并卵，实际使用中所有的图片仍然显示不出来。\n 问题分析 Tumblr 把图片分为两种：装饰网页用的底图、logo 等等，以及发表内容时上传的照片、动图等。前者被 Tumblr 统一放在了 static.tumblr.com 服务器上，后者所在的服务器则使用了 数字.media.tumblr.com 这种形式的子域名。\n事实上除了图片，Tumblr 还会在类似 assets.tumblr.com 这样的服务器上放置一些 JS 代码。所以，需要针对所有这些服务器设置反向代理。\n 改进设置 利用 Nginx 的 sub_filter，先把页面中所有的 tumblr.com 替换为 sample.com，即添加这行：\n(注#1：并不是所有 Nginx 的版本都支持超过一个 sub_filter，所以请更新 Nginx 到最新版。)\n(注#2：个人域名的 DNS 服务商最好支持 catch-all，即对 *.sample.com 这种形式的解析，这样就不用额外处理每一个子域名。)\n之后利用正则表达式和变量，配置对上述服务器的反向代理：\nserver { listen 80; server_name ~^(?\u0026lt;subdomain\u0026gt;\\S\u002b)\\.sample\\.com$; location \/ { resolver 8.",
+  "description" : "序 终于搬砖将自己的 Tumblr 重新搭好，然后发现xx移动把 Tumblr 墙了👀。决定用「反向代理」这种简单粗暴直接的方式实现无阻碍访问。\n 过程 初始设置 一般会使用 Nginx 来做反向代理。找到了一个现成配置是用来反向代理 Tumblr 的： server { listen 80; server_name blog.sample.com;\nlocation \/ { proxy_pass http:\/\/sample.tumblr.com; proxy_redirect off; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; proxy_set_header Accept-Encoding \u0026ldquo;\u0026quot;; }\nsub_filter sample.tumblr.com blog.sample.com; sub_filter_once off; }(via Wood Tale)\n在自己的 VPS 服务器上照此设置了 Nginx，然并卵，实际使用中所有的图片仍然显示不出来。\n 问题分析 Tumblr 把图片分为两种：装饰网页用的底图、logo 等等，以及发表内容时上传的照片、动图等。前者被 Tumblr 统一放在了 static.tumblr.com 服务器上，后者所在的服务器则使用了 数字.media.tumblr.com 这种形式的子域名。\n事实上除了图片，Tumblr 还会在类似 assets.tumblr.com 这样的服务器上放置一些 JS 代码。所以，需要针对所有这些服务器设置反向代理。\n 改进设置 利用 Nginx 的 sub_filter，先把页面中所有的 tumblr.",
   "inLanguage" : "en",
-  "wordCount":  225 ,
+  "wordCount":  253 ,
   "datePublished" : "0001-01-01T00:00:00",
   "dateModified" : "0001-01-01T00:00:00",
   "image" : "https:\/\/tldr.jsv.me\/",
@@ -88,26 +85,22 @@ server { listen 80; server_name ~^(?&lt;subdomain&gt;\S&#43;)\.sample\.com$; loc
 </script>
 
 <meta property="og:title" content="亲爱的我把 Tumblr 反向代理了" />
-<meta property="og:description" content="content {:toc}  序 终于搬砖将自己的 Tumblr 重新搭好，然后发现xx移动把 Tumblr 墙了👀。决定用「反向代理」这种简单粗暴直接的方式实现无阻碍访问。
- 过程 初始设置 一般会使用 Nginx 来做反向代理。找到了一个现成配置是用来反向代理 Tumblr 的：
-(via Wood Tale)
+<meta property="og:description" content="序 终于搬砖将自己的 Tumblr 重新搭好，然后发现xx移动把 Tumblr 墙了👀。决定用「反向代理」这种简单粗暴直接的方式实现无阻碍访问。
+ 过程 初始设置 一般会使用 Nginx 来做反向代理。找到了一个现成配置是用来反向代理 Tumblr 的： server { listen 80; server_name blog.sample.com;
+location / { proxy_pass http://sample.tumblr.com; proxy_redirect off; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; proxy_set_header Accept-Encoding &ldquo;&quot;; }
+sub_filter sample.tumblr.com blog.sample.com; sub_filter_once off; }(via Wood Tale)
 在自己的 VPS 服务器上照此设置了 Nginx，然并卵，实际使用中所有的图片仍然显示不出来。
  问题分析 Tumblr 把图片分为两种：装饰网页用的底图、logo 等等，以及发表内容时上传的照片、动图等。前者被 Tumblr 统一放在了 static.tumblr.com 服务器上，后者所在的服务器则使用了 数字.media.tumblr.com 这种形式的子域名。
 事实上除了图片，Tumblr 还会在类似 assets.tumblr.com 这样的服务器上放置一些 JS 代码。所以，需要针对所有这些服务器设置反向代理。
- 改进设置 利用 Nginx 的 sub_filter，先把页面中所有的 tumblr.com 替换为 sample.com，即添加这行：
-(注#1：并不是所有 Nginx 的版本都支持超过一个 sub_filter，所以请更新 Nginx 到最新版。)
-(注#2：个人域名的 DNS 服务商最好支持 catch-all，即对 *.sample.com 这种形式的解析，这样就不用额外处理每一个子域名。)
-之后利用正则表达式和变量，配置对上述服务器的反向代理：
-server { listen 80; server_name ~^(?&lt;subdomain&gt;\S&#43;)\.sample\.com$; location / { resolver 8.">
+ 改进设置 利用 Nginx 的 sub_filter，先把页面中所有的 tumblr.">
 <meta property="og:url" content="https://tldr.jsv.me/posts/reverse-proxy-tumblr/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="== TL;DR ==" />
 
   <meta name="twitter:title" content="亲爱的我把 Tumblr 反向代理了" />
-  <meta name="twitter:description" content="content {:toc}  序 终于搬砖将自己的 Tumblr 重新搭好，然后发现xx移动把 Tumblr 墙了👀。决定用「反向代理」这种简单粗暴直接的方式实现无阻碍访问。
- 过程 初始设置 一般会使用 Nginx 来做反向代理。找到了一个现成配置是用来反向代理 Tumblr 的：
-(via Wood Tale)
-在自己的 VPS 服务器上照此设置了 Nginx，然并卵，实际使用中所有的图片仍 …">
+  <meta name="twitter:description" content="序 终于搬砖将自己的 Tumblr 重新搭好，然后发现xx移动把 Tumblr 墙了👀。决定用「反向代理」这种简单粗暴直接的方式实现无阻碍访问。
+ 过程 初始设置 一般会使用 Nginx 来做反向代理。找到了一个现成配置是用来反向代理 Tumblr 的： server { listen 80; server_name blog.sample.com;
+location / { proxy_pass …">
   <meta name="twitter:card" content="summary" />
   <meta name="generator" content="Hugo 0.74.3" />
   <link rel="alternate" href="https://tldr.jsv.me/index.xml" type="application/rss+xml" title="== TL;DR =="><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
@@ -237,19 +230,27 @@ server { listen 80; server_name ~^(?&lt;subdomain&gt;\S&#43;)\.sample\.com$; loc
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        <ul>
-<li>content
-{:toc}</li>
-</ul>
-<h2 id="序">序</h2>
+        <h2 id="序">序</h2>
 <p>终于搬砖将自己的 Tumblr 重新搭好，然后发现xx移动把 Tumblr 墙了👀。决定用「反向代理」这种简单粗暴直接的方式实现无阻碍访问。</p>
 <hr>
 <h2 id="过程">过程</h2>
 <h3 id="初始设置">初始设置</h3>
-<p>一般会使用 Nginx 来做反向代理。找到了一个现成配置是用来反向代理 Tumblr 的：</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p>(via <a href="http://adaromu.tumblr.com/post/33722081482/nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86tumblr%E9%85%8D%E7%BD%AE">Wood Tale</a>)</p>
+<p>一般会使用 Nginx 来做反向代理。找到了一个现成配置是用来反向代理 Tumblr 的：
+<!-- raw HTML omitted -->server
+{
+listen 80;
+server_name blog.sample.com;</p>
+<p>location / {
+proxy_pass <a href="http://sample.tumblr.com">http://sample.tumblr.com</a>;
+proxy_redirect off;
+proxy_set_header X-Real-IP $remote_addr;
+proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+proxy_set_header Accept-Encoding &ldquo;&quot;;
+}</p>
+<p>sub_filter sample.tumblr.com blog.sample.com;
+sub_filter_once off;
+}<!-- raw HTML omitted -->
+(via <a href="http://adaromu.tumblr.com/post/33722081482/nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86tumblr%E9%85%8D%E7%BD%AE">Wood Tale</a>)</p>
 <p>在自己的 VPS 服务器上照此设置了 Nginx，然并卵，实际使用中所有的图片仍然显示不出来。</p>
 <hr>
 <h3 id="问题分析">问题分析</h3>
@@ -257,9 +258,9 @@ server { listen 80; server_name ~^(?&lt;subdomain&gt;\S&#43;)\.sample\.com$; loc
 <p>事实上除了图片，Tumblr 还会在类似 <code>assets.tumblr.com</code> 这样的服务器上放置一些 JS 代码。所以，需要针对所有这些服务器设置反向代理。</p>
 <hr>
 <h3 id="改进设置">改进设置</h3>
-<p>利用 Nginx 的 <code>sub_filter</code>，先把页面中所有的 <code>tumblr.com</code> 替换为 <code>sample.com</code>，即添加这行：</p>
-<!-- raw HTML omitted -->
-<p>(注#1：并不是所有 Nginx 的版本都支持超过一个 <code>sub_filter</code>，所以请更新 Nginx 到最新版。)<br>
+<p>利用 Nginx 的 <code>sub_filter</code>，先把页面中所有的 <code>tumblr.com</code> 替换为 <code>sample.com</code>，即添加这行：
+<!-- raw HTML omitted -->sub_filter tumblr.com sample.com;<!-- raw HTML omitted -->
+(注#1：并不是所有 Nginx 的版本都支持超过一个 <code>sub_filter</code>，所以请更新 Nginx 到最新版。)<br>
 (注#2：个人域名的 DNS 服务商最好支持 <code>catch-all</code>，即对 <code>*.sample.com</code> 这种形式的解析，这样就不用额外处理每一个子域名。)</p>
 <p>之后利用正则表达式和变量，配置对上述服务器的反向代理：</p>
 <pre><code>server
